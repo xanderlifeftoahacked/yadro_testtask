@@ -1,9 +1,6 @@
 #include "Encoder.hpp"
-#include <iostream>
 
-Encoder::Encoder(const size_t _constraint,
-                 const std::vector<std::vector<bool>> &polys)
-    : constraint(_constraint) {
+Encoder::Encoder(const size_t _constraint, const std::vector<std::vector<bool>> &polys) : constraint(_constraint) {
 
   if (polys.size() == 0 || _constraint == 0 || _constraint > MEM)
     throw std::invalid_argument("Bad polynom sz (not 1 - 32)");
@@ -29,7 +26,9 @@ void Encoder::update_state(const bool bit) {
   shift_register |= (static_cast<int32_t>(bit) << (MEM - 1));
 }
 
-void Encoder::reset() { shift_register = 0U; }
+void Encoder::reset() {
+  shift_register = 0U;
+}
 
 std::vector<bool> Encoder::encode_bits(const std::vector<bool> &bits) noexcept {
   std::vector<bool> output;
@@ -41,5 +40,9 @@ std::vector<bool> Encoder::encode_bits(const std::vector<bool> &bits) noexcept {
     }
   }
 
-  return output;
+  return std::move(output);
 }
+
+std::vector<bool> operator>>(const std::vector<bool> &input, Encoder &encoder) noexcept {
+  return encoder.encode_bits(input);
+};

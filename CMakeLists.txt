@@ -8,7 +8,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_library(viterbi
     src/Encoder.cpp
     src/Decoder.cpp
+		src/Channel.cpp
 )
+
 target_include_directories(viterbi PUBLIC 
     "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
