@@ -52,6 +52,7 @@ test_codec(Encoder &coder, Decoder &decoder, std::mt19937 &dev, size_t msg_sz,
 
     x.emplace_back(real_prob);
     y.emplace_back(error_rate);
+    coder.reset();
   }
 
   return {x, y};

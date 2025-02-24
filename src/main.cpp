@@ -24,8 +24,8 @@ int main() {
   {
     Encoder coder(LTE_constraint, LTE_gens);
     Decoder decoder(LTE_constraint, LTE_gens);
-    std::cout << "Measuring... (1000 bits msg, 1000 samples)" << std::endl;
-    auto [x, y] = utils::test_codec(coder, decoder, dev, 1000, 1000);
+    std::cout << "Measuring... (1000 bits msg, 2000 samples)" << std::endl;
+    auto [x, y] = utils::test_codec(coder, decoder, dev, 1000, 2000);
     plot.send1d(std::make_tuple(x, y));
   }
 
@@ -33,8 +33,8 @@ int main() {
   {
     Encoder coder(CASSINI_constraint, CASSINI_gens);
     Decoder decoder(CASSINI_constraint, CASSINI_gens);
-    std::cout << "Measuring... (1000 bits msg, 200 samples)" << std::endl;
-    auto [x, y] = utils::test_codec(coder, decoder, dev, 1000, 200);
+    std::cout << "Measuring... (1000 bits msg, 100 samples)" << std::endl;
+    auto [x, y] = utils::test_codec(coder, decoder, dev, 1000, 100);
     plot.send1d(std::make_tuple(x, y));
   }
 
