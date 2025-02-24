@@ -1,7 +1,8 @@
 #include "Channel.hpp"
-#include <iostream>
+#include <stdexcept>
 
-Channel::Channel(double _probability) : probability{_probability}, generator{std::random_device{}()} {
+Channel::Channel(double _probability, std::mt19937 &gen)
+    : probability{_probability}, generator{gen} {
   if (_probability < 0.0 || _probability > 1.0) {
     throw std::invalid_argument("Bad probability (should be in [0, 1])");
   }
@@ -12,16 +13,16 @@ std::vector<bool> Channel::add_noise(const std::vector<bool> &input) noexcept {
   output.reserve(input.size());
 
   for (bool bit : input) {
-    if (distribution(generator) < probability) {
-      output.push_back(!bit);
-      std::cout << "ERROR!\n";
-    } else {
-      output.push_back(bit);
-    }
+    if (distribution(generator) < probability)
+      output.emplace_back(!bit);
+    else
+      output.emplace_back(bit);
   }
-  return std::move(output);
+
+  return output;
 };
 
-std::vector<bool> operator>>(const std::vector<bool> &input, Channel &channel) noexcept {
-  return std::move(channel.add_noise(input));
+std::vector<bool> operator>>(const std::vector<bool> &input,
+                             Channel &channel) noexcept {
+  return channel.add_noise(input);
 }
