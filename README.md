@@ -14,10 +14,10 @@ make
 * GNUPlot
 * Boost (GNUPlot dependency)
 
-Note, that Cassini polynoms test may require some time (you can adjust parameters in `utils::test_codec` call `(main.cpp)`)
+Note, that Cassini polynomials test may require some time (you can adjust parameters in `utils::test_codec` call `(main.cpp)`)
 
 ### Details:
-Programm generates random bit-sequences, codes them, adds noise with different probability, then decodes them and compares with original ones. 
+Programm generates random bit-sequences, encodes them, adds noise with different probability, then decodes them and compares with original ones. 
 
 Encoder and Decoder classes support any generator polynomials (passed in parameters as vector of bools)
 

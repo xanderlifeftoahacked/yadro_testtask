@@ -8,7 +8,7 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 
 add_library(viterbi
     src/Encoder.cpp
-    src/Decoder.cpp
+		src/Decoder.cpp
 		src/Channel.cpp
 )
 
